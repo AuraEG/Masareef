@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:masareef/core/constant/app_color.dart';
 import 'package:masareef/core/utils/spacing.dart';
-import 'package:masareef/features/onboarding/onboarding_screen.dart';
+import 'package:masareef/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:masareef/features/splash/widgets/splash_animated_logo.dart';
 
 class SplashScreen extends StatefulWidget {
