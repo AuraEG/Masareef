@@ -25,9 +25,72 @@ class OnboardingContent extends StatelessWidget {
               width: imageSize,
               height: imageSize,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24.r),
+                borderRadius: BorderRadius.circular(30.r),
+                gradient: const LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [Color(0xFF1A3A2E), Color(0xFF0D1D17)],
+                ),
+                border: Border.all(
+                  color: AppColor.primaryLightGreen.withValues(alpha: 0.35),
+                  width: 1.2,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.22),
+                    blurRadius: 24,
+                    offset: const Offset(0, 12),
+                  ),
+                ],
               ),
-              child: Image.asset(data.image, fit: BoxFit.contain),
+              child: Stack(
+                children: [
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Container(
+                      width: imageSize * 0.34,
+                      height: imageSize * 0.34,
+                      margin: EdgeInsets.all(18.r),
+                      decoration: BoxDecoration(
+                        color: AppColor.primaryGreen.withValues(alpha: 0.25),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Container(
+                      width: imageSize * 0.22,
+                      height: imageSize * 0.22,
+                      margin: EdgeInsets.all(20.r),
+                      decoration: BoxDecoration(
+                        color: AppColor.primaryLightGreen.withValues(alpha: 0.18),
+                        shape: BoxShape.circle,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Container(
+                      width: imageSize * 0.52,
+                      height: imageSize * 0.52,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: AppColor.primaryGreen.withValues(alpha: 0.16),
+                        border: Border.all(
+                          color: AppColor.primaryLightGreen.withValues(
+                            alpha: 0.35,
+                          ),
+                        ),
+                      ),
+                      child: Icon(
+                        data.icon,
+                        color: AppColor.primaryLightGreen,
+                        size: imageSize * 0.23,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             SizedBox(height: screenHeight * 0.1),
             Text(

@@ -20,7 +20,7 @@ class NextButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColor.primaryGreen,
+          backgroundColor: AppColor.primaryGreen.withValues(alpha: 0.5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(36.r),
           ),

@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(milliseconds: 2500),
     );
 
     _scaleAnimation = Tween<double>(
@@ -35,18 +35,17 @@ class _SplashScreenState extends State<SplashScreen>
     _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.3, 1.0, curve: Curves.easeIn),
+        curve: const Interval(0.4, 1.0, curve: Curves.easeIn),
       ),
     );
 
     _controller.forward();
 
-    Future.delayed(const Duration(seconds: 3), () {
-      if (mounted) {
+    _controller.addStatusListener((status) {
+      if (status == AnimationStatus.completed) {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => OnboardingScreen()),
-          // isLoggedInUser ? Routes.homeScreen : Routes.onBoardingScreen,
         );
       }
     });

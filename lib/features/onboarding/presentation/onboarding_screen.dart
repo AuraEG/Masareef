@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:masareef/core/constant/app_color.dart';
-import 'package:masareef/core/constant/app_images.dart';
 import 'package:masareef/features/home/home_screen.dart';
 import '../models/onboarding_data_model.dart';
 import 'widgets/next_button.dart';
@@ -24,19 +23,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       title: 'Smart Expense Tracking',
       description:
           'Monitor your spending with clear insights and detailed financial reports.',
-      image: AppImages.onboarding_1,
+      icon: Icons.insights_rounded,
     ),
     OnboardingDataModel(
       title: 'Fast & Easy Notification',
       description:
           'Send and receive money instantly with real-time transaction updates.',
-      image: AppImages.onboarding_2,
+      icon: Icons.notifications_active_rounded,
     ),
     OnboardingDataModel(
       title: 'Fully Secured',
       description:
           'Keep your savings safe with advanced protection and full control over your finances.',
-      image: AppImages.onboarding_3,
+      icon: Icons.shield_rounded,
     ),
   ];
 
