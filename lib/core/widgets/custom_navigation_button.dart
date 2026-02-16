@@ -19,10 +19,12 @@ class CustomNavigationBar extends StatelessWidget {
     ];
     return CurvedNavigationBar(
       index: indx,
-      color: AppColor.primaryGreen.withValues(alpha: 0.5), // navigation bar
-      buttonBackgroundColor: AppColor.green.withValues(alpha: 0.1), // icon bg when selected
+      color: AppColor.primaryMedium.withValues(alpha: 0.5), // navigation bar
+      buttonBackgroundColor: AppColor.green.withValues(
+        alpha: 0.1,
+      ), // icon bg when selected
 
-      backgroundColor: AppColor.primaryDarkGreen,
+      backgroundColor: AppColor.primaryDark,
       items: <Widget>[
         Icon(Icons.home, size: 35, color: AppColor.white),
         Icon(Icons.wallet_outlined, size: 35, color: AppColor.white),

@@ -32,7 +32,7 @@ class OnboardingContent extends StatelessWidget {
                   colors: [Color(0xFF1A3A2E), Color(0xFF0D1D17)],
                 ),
                 border: Border.all(
-                  color: AppColor.primaryLightGreen.withValues(alpha: 0.35),
+                  color: AppColor.primaryLight.withValues(alpha: 0.35),
                   width: 1.2,
                 ),
                 boxShadow: [
@@ -52,7 +52,7 @@ class OnboardingContent extends StatelessWidget {
                       height: imageSize * 0.34,
                       margin: EdgeInsets.all(18.r),
                       decoration: BoxDecoration(
-                        color: AppColor.primaryGreen.withValues(alpha: 0.25),
+                        color: AppColor.primaryMedium.withValues(alpha: 0.25),
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -64,7 +64,7 @@ class OnboardingContent extends StatelessWidget {
                       height: imageSize * 0.22,
                       margin: EdgeInsets.all(20.r),
                       decoration: BoxDecoration(
-                        color: AppColor.primaryLightGreen.withValues(alpha: 0.18),
+                        color: AppColor.primaryLight.withValues(alpha: 0.18),
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -75,16 +75,14 @@ class OnboardingContent extends StatelessWidget {
                       height: imageSize * 0.52,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: AppColor.primaryGreen.withValues(alpha: 0.16),
+                        color: AppColor.primaryMedium.withValues(alpha: 0.16),
                         border: Border.all(
-                          color: AppColor.primaryLightGreen.withValues(
-                            alpha: 0.35,
-                          ),
+                          color: AppColor.primaryLight.withValues(alpha: 0.35),
                         ),
                       ),
                       child: Icon(
                         data.icon,
-                        color: AppColor.primaryLightGreen,
+                        color: AppColor.primaryLight,
                         size: imageSize * 0.23,
                       ),
                     ),
@@ -110,7 +108,7 @@ class OnboardingContent extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15.sp,
-                  color: AppColor.primaryGreen,
+                  color: AppColor.primaryMedium,
                   height: 1.5,
                 ),
               ),

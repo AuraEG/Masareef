@@ -8,8 +8,8 @@ class AnalyticsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColor.primaryDarkGreen,
-      appBar: AppBar(backgroundColor: AppColor.primaryDarkGreen),
+      backgroundColor: AppColor.primaryDark,
+      appBar: AppBar(backgroundColor: AppColor.primaryDark),
       body: Center(
         child: Text(
           'analysis screen',

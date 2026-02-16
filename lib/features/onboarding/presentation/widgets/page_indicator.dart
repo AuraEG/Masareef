@@ -25,7 +25,7 @@ class PageIndicator extends StatelessWidget {
           height: 8.h,
           decoration: BoxDecoration(
             color: currentPage == index
-                ? AppColor.primaryGreen
+                ? AppColor.primaryMedium
                 : Colors.grey.shade300,
             borderRadius: BorderRadius.circular(4.r),
           ),

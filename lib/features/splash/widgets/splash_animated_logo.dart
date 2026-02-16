@@ -22,7 +22,7 @@ class SplashAnimatedLogo extends StatelessWidget {
         height: 200.h,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: AppColor.primaryGreen.withValues(alpha: 0.2),
+          color: AppColor.primaryMedium.withValues(alpha: 0.2),
         ),
         child: Opacity(
           opacity: opacity.value,
