@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen>
     _opacityAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _controller,
-        curve: const Interval(0.4, 1.0, curve: Curves.easeIn),
+        curve: const Interval(0.0, 1.0, curve: Curves.easeIn),
       ),
     );
 
