@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:masareef/core/widgets/custom_navigation_button.dart';
 
-class AnalyticsScreen extends StatelessWidget {
-  const AnalyticsScreen({super.key});
+class ExpenseHistory extends StatelessWidget {
+  const ExpenseHistory({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,11 +13,11 @@ class AnalyticsScreen extends StatelessWidget {
       appBar: AppBar(backgroundColor: colorScheme.surface),
       body: Center(
         child: Text(
-          'analysis screen',
+          'Expense History Screen',
           style: TextStyle(fontSize: 30, color: colorScheme.onSurface),
         ),
       ),
-      bottomNavigationBar: const CustomNavigationBar(indx: 3),
+      bottomNavigationBar: const CustomNavigationBar(indx: 2),
     );
   }
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:masareef/core/widgets/custom_navigation_button.dart';
 
-class AddTransactionScreen extends StatelessWidget {
-  const AddTransactionScreen({super.key});
+class AddExpenseScreen extends StatelessWidget {
+  const AddExpenseScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class AddTransactionScreen extends StatelessWidget {
       appBar: AppBar(backgroundColor: colorScheme.surface),
       body: Center(
         child: Text(
-          'Add Transaction Screen',
+          'Add Expense Screen',
           style: TextStyle(fontSize: 30, color: colorScheme.onSurface),
         ),
       ),

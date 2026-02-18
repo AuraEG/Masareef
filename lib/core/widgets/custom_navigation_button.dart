@@ -2,6 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:masareef/features/adding/add_transaction_screen.dart';
 import 'package:masareef/features/analytics/analytics_screen.dart';
+import 'package:masareef/features/history/expense_history.dart';
 import 'package:masareef/features/home/home_screen.dart';
 import 'package:masareef/features/settings/settings_screen.dart';
 
@@ -16,7 +17,8 @@ class CustomNavigationBar extends StatelessWidget {
 
     final List<Widget> screens = const [
       HomeScreen(),
-      AddTransactionScreen(),
+      AddExpenseScreen(),
+      ExpenseHistory(),
       AnalyticsScreen(),
       SettingsScreen(),
     ];
@@ -31,6 +33,11 @@ class CustomNavigationBar extends StatelessWidget {
       items: <Widget>[
         Icon(Icons.home, size: 35, color: colorScheme.onSurface),
         Icon(Icons.wallet_outlined, size: 35, color: colorScheme.onSurface),
+        Icon(
+          Icons.receipt_long_outlined,
+          size: 35,
+          color: colorScheme.onSurface,
+        ),
         Icon(Icons.analytics, size: 35, color: colorScheme.onSurface),
         Icon(Icons.settings, size: 35, color: colorScheme.onSurface),
       ],

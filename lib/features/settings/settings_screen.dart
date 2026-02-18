@@ -23,7 +23,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
     return Scaffold(
       backgroundColor: colorScheme.surface,
-      bottomNavigationBar: const CustomNavigationBar(indx: 3),
+      bottomNavigationBar: const CustomNavigationBar(indx: 4),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
