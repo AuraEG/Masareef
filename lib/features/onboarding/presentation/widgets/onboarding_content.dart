@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/core/constant/app_color.dart';
 import 'package:masareef/core/utils/spacing.dart';
 import '../../models/onboarding_data_model.dart';
 
@@ -11,6 +10,7 @@ class OnboardingContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     final imageSize = (screenWidth * 0.5).clamp(180.0, 260.0);
@@ -26,18 +26,21 @@ class OnboardingContent extends StatelessWidget {
               height: imageSize,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.r),
-                gradient: const LinearGradient(
+                gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFF1A3A2E), Color(0xFF0D1D17)],
+                  colors: [
+                    colorScheme.primaryContainer,
+                    colorScheme.surfaceContainerHighest,
+                  ],
                 ),
                 border: Border.all(
-                  color: AppColor.primaryLight.withValues(alpha: 0.35),
+                  color: colorScheme.primary.withValues(alpha: 0.35),
                   width: 1.2,
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withValues(alpha: 0.22),
+                    color: colorScheme.shadow.withValues(alpha: 0.22),
                     blurRadius: 24,
                     offset: const Offset(0, 12),
                   ),
@@ -52,7 +55,7 @@ class OnboardingContent extends StatelessWidget {
                       height: imageSize * 0.34,
                       margin: EdgeInsets.all(18.r),
                       decoration: BoxDecoration(
-                        color: AppColor.primaryMedium.withValues(alpha: 0.25),
+                        color: colorScheme.secondary.withValues(alpha: 0.25),
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -64,7 +67,9 @@ class OnboardingContent extends StatelessWidget {
                       height: imageSize * 0.22,
                       margin: EdgeInsets.all(20.r),
                       decoration: BoxDecoration(
-                        color: AppColor.primaryLight.withValues(alpha: 0.18),
+                        color: colorScheme.secondaryContainer.withValues(
+                          alpha: 0.5,
+                        ),
                         shape: BoxShape.circle,
                       ),
                     ),
@@ -75,14 +80,16 @@ class OnboardingContent extends StatelessWidget {
                       height: imageSize * 0.52,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: AppColor.primaryMedium.withValues(alpha: 0.16),
+                        color: colorScheme.secondary.withValues(alpha: 0.16),
                         border: Border.all(
-                          color: AppColor.primaryLight.withValues(alpha: 0.35),
+                          color: colorScheme.secondaryContainer.withValues(
+                            alpha: 0.7,
+                          ),
                         ),
                       ),
                       child: Icon(
                         data.icon,
-                        color: AppColor.primaryLight,
+                        color: colorScheme.onSecondaryContainer,
                         size: imageSize * 0.23,
                       ),
                     ),
@@ -97,7 +104,7 @@ class OnboardingContent extends StatelessWidget {
               style: TextStyle(
                 fontSize: 23.sp,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: colorScheme.onSurface,
               ),
             ),
             verticalSpace(12),
@@ -108,7 +115,7 @@ class OnboardingContent extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 15.sp,
-                  color: AppColor.primaryMedium,
+                  color: colorScheme.onSurfaceVariant,
                   height: 1.5,
                 ),
               ),

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/core/constant/app_color.dart';
 import 'package:masareef/core/utils/spacing.dart';
 import 'package:masareef/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:masareef/features/splash/widgets/splash_animated_logo.dart';
@@ -45,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen>
       if (status == AnimationStatus.completed) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (_) => OnboardingScreen()),
+          MaterialPageRoute(builder: (_) => const OnboardingScreen()),
         );
       }
     });
@@ -53,8 +52,10 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
-      backgroundColor: AppColor.primaryMedium,
+      backgroundColor: colorScheme.primary,
       body: Center(
         child: AnimatedBuilder(
           animation: _controller,
@@ -67,17 +68,20 @@ class _SplashScreenState extends State<SplashScreen>
                   opacity: _opacityAnimation,
                 ),
                 Text(
-                  "Masareef",
+                  'Masareef',
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: colorScheme.onPrimary,
                   ),
                 ),
                 verticalSpace(10),
                 Text(
-                  "Your smart money tracking app",
-                  style: TextStyle(fontSize: 14.sp, color: Colors.white70),
+                  'Your smart money tracking app',
+                  style: TextStyle(
+                    fontSize: 14.sp,
+                    color: colorScheme.onPrimary.withValues(alpha: 0.75),
+                  ),
                 ),
               ],
             );

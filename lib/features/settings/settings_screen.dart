@@ -1,8 +1,6 @@
-// TODO: wtf...refactor this.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/core/constant/app_color.dart';
+import 'package:masareef/core/theme/theme_controller.dart';
 import 'package:masareef/core/utils/spacing.dart';
 import 'package:masareef/core/widgets/custom_navigation_button.dart';
 
@@ -14,16 +12,18 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool _isDarkMode = true;
   bool _notificationsEnabled = true;
   String _selectedLanguage = 'English';
   String _alternateLanguage = 'العربية';
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    final themeController = ThemeScope.of(context);
+
     return Scaffold(
-      backgroundColor: AppColor.primaryDark,
-      bottomNavigationBar: CustomNavigationBar(indx: 3),
+      backgroundColor: colorScheme.surface,
+      bottomNavigationBar: const CustomNavigationBar(indx: 3),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -32,7 +32,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 verticalSpace(10),
-                _buildGeneralSection(),
+                _buildGeneralSection(themeController),
                 verticalSpace(30),
                 _buildDataManagementSection(),
                 verticalSpace(30),
@@ -47,8 +47,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // General Section
-  Widget _buildGeneralSection() {
+  Widget _buildGeneralSection(ThemeController themeController) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -58,9 +59,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
           children: [
             _buildToggleItem(
               icon: Icons.dark_mode_outlined,
-              iconColor: AppColor.primaryMedium,
-              title: 'Dark Mode',
-              value: _isDarkMode,
+              iconColor: colorScheme.secondary,
+              title: 'Change Theme',
+              value: _isDarkModeEnabled(themeController),
               onChanged: _handleDarkModeToggle,
             ),
             verticalSpace(12),
@@ -72,7 +73,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             verticalSpace(12),
             _buildToggleItem(
               icon: Icons.notifications_outlined,
-              iconColor: AppColor.primaryMedium,
+              iconColor: colorScheme.secondary,
               title: 'Notifications',
               value: _notificationsEnabled,
               onChanged: _handleNotificationsToggle,
@@ -83,7 +84,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Data Management Section
   Widget _buildDataManagementSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,24 +95,27 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Danger Zone Section
   Widget _buildDangerZoneSection() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildSectionLabel('DANGER ZONE', color: AppColor.red),
+        _buildSectionLabel(
+          'DANGER ZONE',
+          color: Theme.of(context).colorScheme.error,
+        ),
         verticalSpace(16),
         _buildDangerCard(),
       ],
     );
   }
 
-  // Section label
   Widget _buildSectionLabel(String label, {Color? color}) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Text(
       label,
       style: TextStyle(
-        color: color ?? const Color(0xFF00D9A0),
+        color: color ?? colorScheme.secondary,
         fontSize: 12,
         fontWeight: FontWeight.w600,
         letterSpacing: 1.2,
@@ -120,11 +123,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Settings card wrapper
   Widget _buildSettingsCard({required List<Widget> children}) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF1A3333),
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(16),
       ),
       padding: const EdgeInsets.all(16),
@@ -132,7 +136,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Toggle item (Dark Mode, Notifications)
   Widget _buildToggleItem({
     required IconData icon,
     required Color iconColor,
@@ -140,6 +143,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     required bool value,
     required ValueChanged<bool> onChanged,
   }) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Row(
       children: [
         Container(
@@ -154,8 +159,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
         horizontalSpace(12),
         Text(
           title,
-          style: const TextStyle(
-            color: Colors.white,
+          style: TextStyle(
+            color: colorScheme.onSurface,
             fontSize: 16,
             fontWeight: FontWeight.w500,
           ),
@@ -166,15 +171,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Custom switch
   Widget _buildCustomSwitch(bool value, ValueChanged<bool> onChanged) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return GestureDetector(
       onTap: () => onChanged(!value),
       child: Container(
         width: 50,
         height: 28,
         decoration: BoxDecoration(
-          color: value ? const Color(0xFF00D9A0) : const Color(0xFF2A4444),
+          color: value ? colorScheme.secondary : colorScheme.surfaceContainer,
           borderRadius: BorderRadius.circular(14),
         ),
         padding: const EdgeInsets.all(2),
@@ -184,8 +190,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           child: Container(
             width: 24,
             height: 24,
-            decoration: const BoxDecoration(
-              color: Colors.white,
+            decoration: BoxDecoration(
+              color: colorScheme.onSecondary,
               shape: BoxShape.circle,
             ),
           ),
@@ -194,8 +200,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Language item
   Widget _buildLanguageItem() {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return InkWell(
       onTap: _handleLanguagePress,
       borderRadius: BorderRadius.circular(10),
@@ -205,12 +212,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
             width: 40,
             height: 40,
             decoration: BoxDecoration(
-              color: AppColor.primaryMedium.withValues(alpha: 0.15),
+              color: colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Icon(
               Icons.language,
-              color: AppColor.primaryMedium,
+              color: colorScheme.onSecondaryContainer,
               size: 22,
             ),
           ),
@@ -218,17 +225,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 'Language',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: colorScheme.onSurface,
                   fontSize: 16,
                   fontWeight: FontWeight.w500,
                 ),
               ),
               Text(
                 _selectedLanguage,
-                style: TextStyle(color: AppColor.grey, fontSize: 12),
+                style: TextStyle(
+                  color: colorScheme.onSurfaceVariant,
+                  fontSize: 12,
+                ),
               ),
             ],
           ),
@@ -236,13 +246,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
             decoration: BoxDecoration(
-              color: AppColor.primaryMedium.withValues(alpha: 0.15),
+              color: colorScheme.secondaryContainer,
               borderRadius: BorderRadius.circular(8),
             ),
             child: Text(
               _alternateLanguage,
-              style: const TextStyle(
-                color: Color(0xFF00D9A0),
+              style: TextStyle(
+                color: colorScheme.onSecondaryContainer,
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
               ),
@@ -253,28 +263,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Export button
   Widget _buildExportButton() {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton.icon(
         onPressed: _handleExportPress,
-        icon: const Icon(
+        icon: Icon(
           Icons.download_outlined,
           size: 20,
-          color: Colors.white,
+          color: colorScheme.onSecondary,
         ),
-        label: const Text(
+        label: Text(
           'Export CSV Report',
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w600,
-            color: Colors.white,
+            color: colorScheme.onSecondary,
           ),
         ),
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColor.primaryMedium,
-          foregroundColor: const Color(0xFF0A1F1F),
+          backgroundColor: colorScheme.secondary,
+          foregroundColor: colorScheme.onSecondary,
           padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(16),
@@ -285,11 +296,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Danger card
   Widget _buildDangerCard() {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF1A3333),
+        color: colorScheme.surfaceContainerHigh,
         borderRadius: BorderRadius.circular(16),
       ),
       padding: const EdgeInsets.all(16),
@@ -297,7 +309,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
         children: [
           Text(
             'Clearing data will permanently delete all your expenses, budgets, and history. This action cannot be undone.',
-            style: TextStyle(color: AppColor.grey, fontSize: 13, height: 1.5),
+            style: TextStyle(
+              color: colorScheme.onSurfaceVariant,
+              fontSize: 13,
+              height: 1.5,
+            ),
           ),
           verticalSpace(16),
           SizedBox(
@@ -310,8 +326,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: AppColor.red,
-                foregroundColor: Colors.white,
+                backgroundColor: colorScheme.error,
+                foregroundColor: colorScheme.onError,
                 padding: const EdgeInsets.symmetric(vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16),
@@ -325,20 +341,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Divider
   Widget _buildDivider() {
-    return Container(height: 1, color: const Color(0xFF2A4444));
+    return Container(
+      height: 1,
+      color: Theme.of(context).colorScheme.outlineVariant,
+    );
   }
 
-  // Footer
   Widget _buildFooter() {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Center(
       child: Column(
         children: [
           Text(
             'Masroofi App',
             style: TextStyle(
-              color: Colors.white.withValues(alpha: 0.4),
+              color: colorScheme.onSurface.withValues(alpha: 0.4),
               fontSize: 12,
             ),
           ),
@@ -346,7 +365,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           Text(
             'Version 1.0.0 (Build 2026)',
             style: TextStyle(
-              color: Colors.white.withValues(alpha: 0.3),
+              color: colorScheme.onSurface.withValues(alpha: 0.3),
               fontSize: 11,
             ),
           ),
@@ -355,20 +374,26 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // ==================== Event Handlers (Ready for Logic) ====================
+  bool _isDarkModeEnabled(ThemeController themeController) {
+    return switch (themeController.themeMode) {
+      ThemeMode.dark => true,
+      ThemeMode.light => false,
+      ThemeMode.system =>
+        MediaQuery.platformBrightnessOf(context) == Brightness.dark,
+    };
+  }
 
-  void _handleDarkModeToggle(bool value) {
-    setState(() {
-      _isDarkMode = value;
-    });
-    // TODO: Implement theme switching logic
+  Future<void> _handleDarkModeToggle(bool value) async {
+    final themeController = ThemeScope.of(context);
+    await themeController.setThemeMode(
+      value ? ThemeMode.dark : ThemeMode.light,
+    );
   }
 
   void _handleNotificationsToggle(bool value) {
     setState(() {
       _notificationsEnabled = value;
     });
-    // TODO: Implement notification preferences logic
   }
 
   void _handleLanguagePress() {
@@ -383,12 +408,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     _showClearDataDialog();
   }
 
-  // Language change dialog
   void _showLanguageChangeDialog() {
+    final colorScheme = Theme.of(context).colorScheme;
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1A3333),
+        backgroundColor: colorScheme.surfaceContainerHigh,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Row(
           children: [
@@ -396,20 +422,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: AppColor.primaryMedium.withValues(alpha: 0.15),
+                color: colorScheme.secondaryContainer,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: const Icon(
+              child: Icon(
                 Icons.language,
-                color: Color(0xFF00D9A0),
+                color: colorScheme.onSecondaryContainer,
                 size: 22,
               ),
             ),
             horizontalSpace(12),
-            const Text(
+            Text(
               'Change Language',
               style: TextStyle(
-                color: Colors.white,
+                color: colorScheme.onSurface,
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
@@ -420,21 +446,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
           _selectedLanguage == 'English'
               ? 'Do you want to change the language to Arabic?'
               : 'هل تريد تغيير اللغة إلى الإنجليزية؟',
-          style: TextStyle(color: AppColor.grey, fontSize: 14, height: 1.5),
+          style: TextStyle(
+            color: colorScheme.onSurfaceVariant,
+            fontSize: 14,
+            height: 1.5,
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            style: TextButton.styleFrom(foregroundColor: AppColor.grey),
+            style: TextButton.styleFrom(
+              foregroundColor: colorScheme.onSurfaceVariant,
+            ),
             child: Text(
               _selectedLanguage == 'English' ? 'Cancel' : 'إلغاء',
-              style: TextStyle(fontSize: 14, color: AppColor.green),
+              style: TextStyle(
+                fontSize: 14,
+                color: colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
           ElevatedButton(
             onPressed: () {
               setState(() {
-                // Swap languages
                 if (_selectedLanguage == 'English') {
                   _selectedLanguage = 'العربية';
                   _alternateLanguage = 'English';
@@ -444,11 +478,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 }
               });
               Navigator.pop(context);
-              // TODO: Implement actual language switching logic
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF00D9A0),
-              foregroundColor: const Color(0xFF0A1F1F),
+              backgroundColor: colorScheme.secondary,
+              foregroundColor: colorScheme.onSecondary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -459,7 +492,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: AppColor.white,
+                color: colorScheme.onSecondary,
               ),
             ),
           ),
@@ -468,12 +501,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Export CSV confirmation dialog
   void _showExportConfirmationDialog() {
+    final colorScheme = Theme.of(context).colorScheme;
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1A3333),
+        backgroundColor: colorScheme.surfaceContainerHigh,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Row(
           children: [
@@ -481,20 +515,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
               width: 40,
               height: 40,
               decoration: BoxDecoration(
-                color: AppColor.primaryMedium.withValues(alpha: 0.15),
+                color: colorScheme.secondaryContainer,
                 borderRadius: BorderRadius.circular(14),
               ),
               child: Icon(
                 Icons.download_outlined,
-                color: AppColor.primaryMedium,
+                color: colorScheme.onSecondaryContainer,
                 size: 22,
               ),
             ),
             horizontalSpace(12),
-            const Text(
+            Text(
               'Export CSV Report',
               style: TextStyle(
-                color: Colors.white,
+                color: colorScheme.onSurface,
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
@@ -503,25 +537,33 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         content: Text(
           'Do you want to export all your expenses and budgets data to a CSV file? The file will be saved to your device.',
-          style: TextStyle(color: AppColor.grey, fontSize: 14, height: 1.5),
+          style: TextStyle(
+            color: colorScheme.onSurfaceVariant,
+            fontSize: 14,
+            height: 1.5,
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            style: TextButton.styleFrom(foregroundColor: AppColor.grey),
+            style: TextButton.styleFrom(
+              foregroundColor: colorScheme.onSurfaceVariant,
+            ),
             child: Text(
               'Cancel',
-              style: TextStyle(fontSize: 14, color: AppColor.green),
+              style: TextStyle(
+                fontSize: 14,
+                color: colorScheme.onSurfaceVariant,
+              ),
             ),
           ),
           ElevatedButton.icon(
             onPressed: () {
               Navigator.pop(context);
-              // TODO: Implement actual CSV export logic
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: const Text('CSV Report exported successfully!'),
-                  backgroundColor: AppColor.primaryMedium,
+                  backgroundColor: colorScheme.secondary,
                   behavior: SnackBarBehavior.floating,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -530,13 +572,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
               );
             },
             icon: const Icon(Icons.download_outlined, size: 18),
-            label: Text(
+            label: const Text(
               'Export',
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.primaryMedium,
-              foregroundColor: AppColor.white,
+              backgroundColor: colorScheme.secondary,
+              foregroundColor: colorScheme.onSecondary,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(14).r,
               ),
@@ -548,12 +590,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  // Clear data dialog
   void _showClearDataDialog() {
+    final colorScheme = Theme.of(context).colorScheme;
+
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        backgroundColor: const Color(0xFF1A3333),
+        backgroundColor: colorScheme.surfaceContainerHigh,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: Row(
           children: [
@@ -561,20 +604,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
               width: 35.w,
               height: 35.h,
               decoration: BoxDecoration(
-                color: AppColor.red.withValues(alpha: 0.15),
+                color: colorScheme.errorContainer,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Icon(
                 Icons.warning_outlined,
-                color: AppColor.red,
+                color: colorScheme.onErrorContainer,
                 size: 22,
               ),
             ),
             horizontalSpace(12),
-            const Text(
+            Text(
               'Clear All Data?',
               style: TextStyle(
-                color: Colors.white,
+                color: colorScheme.onSurface,
                 fontSize: 18,
                 fontWeight: FontWeight.w600,
               ),
@@ -583,31 +626,34 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         content: Text(
           'This action cannot be undone. All your expenses, budgets, and history will be permanently deleted.',
-          style: TextStyle(color: AppColor.grey, fontSize: 14, height: 1.5),
+          style: TextStyle(
+            color: colorScheme.onSurfaceVariant,
+            fontSize: 14,
+            height: 1.5,
+          ),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
             style: TextButton.styleFrom(
-              foregroundColor: AppColor.primaryMedium,
+              foregroundColor: colorScheme.onSurfaceVariant,
             ),
             child: Text(
               'Cancel',
               style: TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w600,
-                color: AppColor.green,
+                color: colorScheme.onSurfaceVariant,
               ),
             ),
           ),
           ElevatedButton.icon(
             onPressed: () {
-              // TODO: Implement actual data clearing logic
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: const Text('All data has been cleared'),
-                  backgroundColor: AppColor.red,
+                  backgroundColor: colorScheme.error,
                   behavior: SnackBarBehavior.floating,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -621,8 +667,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
             ),
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.red,
-              foregroundColor: Colors.white,
+              backgroundColor: colorScheme.error,
+              foregroundColor: colorScheme.onError,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
               ),

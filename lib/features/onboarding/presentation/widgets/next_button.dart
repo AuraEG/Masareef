@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/core/constant/app_color.dart';
 
 class NextButton extends StatelessWidget {
   final VoidCallback onPressed;
@@ -14,13 +13,18 @@ class NextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return SizedBox(
       width: double.infinity,
       height: 50.h,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: AppColor.primaryMedium.withValues(alpha: 0.5),
+          backgroundColor: colorScheme.secondaryContainer.withValues(
+            alpha: 0.8,
+          ),
+          foregroundColor: colorScheme.onSecondaryContainer,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(36.r),
           ),
@@ -31,7 +35,7 @@ class NextButton extends StatelessWidget {
           style: TextStyle(
             fontSize: 16.sp,
             fontWeight: FontWeight.w600,
-            color: Colors.white,
+            color: colorScheme.onSecondaryContainer,
           ),
         ),
       ),

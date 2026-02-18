@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/core/constant/app_color.dart';
 
 class PageIndicator extends StatelessWidget {
   final int currentPage;
@@ -14,6 +13,8 @@ class PageIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(
@@ -25,8 +26,8 @@ class PageIndicator extends StatelessWidget {
           height: 8.h,
           decoration: BoxDecoration(
             color: currentPage == index
-                ? AppColor.primaryMedium
-                : Colors.grey.shade300,
+                ? colorScheme.secondary
+                : colorScheme.outlineVariant,
             borderRadius: BorderRadius.circular(4.r),
           ),
         ),

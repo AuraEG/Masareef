@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:masareef/core/constant/app_color.dart';
 import 'package:masareef/core/widgets/custom_navigation_button.dart';
 
 class AnalyticsScreen extends StatelessWidget {
@@ -7,16 +6,18 @@ class AnalyticsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Scaffold(
-      backgroundColor: AppColor.primaryDark,
-      appBar: AppBar(backgroundColor: AppColor.primaryDark),
+      backgroundColor: colorScheme.surface,
+      appBar: AppBar(backgroundColor: colorScheme.surface),
       body: Center(
         child: Text(
           'analysis screen',
-          style: TextStyle(fontSize: 30, color: Colors.white),
+          style: TextStyle(fontSize: 30, color: colorScheme.onSurface),
         ),
       ),
-      bottomNavigationBar: CustomNavigationBar(indx: 2),
+      bottomNavigationBar: const CustomNavigationBar(indx: 2),
     );
   }
 }

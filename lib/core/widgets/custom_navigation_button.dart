@@ -1,6 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:masareef/core/constant/app_color.dart';
 import 'package:masareef/features/adding/add_transaction_screen.dart';
 import 'package:masareef/features/analytics/analytics_screen.dart';
 import 'package:masareef/features/home/home_screen.dart';
@@ -8,28 +7,32 @@ import 'package:masareef/features/settings/settings_screen.dart';
 
 class CustomNavigationBar extends StatelessWidget {
   const CustomNavigationBar({super.key, required this.indx});
+
   final int indx;
+
   @override
   Widget build(BuildContext context) {
-    final List<Widget> screens = [
+    final colorScheme = Theme.of(context).colorScheme;
+
+    final List<Widget> screens = const [
       HomeScreen(),
       AddTransactionScreen(),
       AnalyticsScreen(),
       SettingsScreen(),
     ];
+
     return CurvedNavigationBar(
       index: indx,
-      color: AppColor.primaryMedium.withValues(alpha: 0.5), // navigation bar
-      buttonBackgroundColor: AppColor.green.withValues(
-        alpha: 0.1,
-      ), // icon bg when selected
-
-      backgroundColor: AppColor.primaryDark,
+      color: colorScheme.surfaceContainerHigh.withValues(alpha: 0.9),
+      buttonBackgroundColor: colorScheme.secondaryContainer.withValues(
+        alpha: 0.8,
+      ),
+      backgroundColor: colorScheme.surface,
       items: <Widget>[
-        Icon(Icons.home, size: 35, color: AppColor.white),
-        Icon(Icons.wallet_outlined, size: 35, color: AppColor.white),
-        Icon(Icons.analytics, size: 35, color: AppColor.white),
-        Icon(Icons.settings, size: 35, color: AppColor.white),
+        Icon(Icons.home, size: 35, color: colorScheme.onSurface),
+        Icon(Icons.wallet_outlined, size: 35, color: colorScheme.onSurface),
+        Icon(Icons.analytics, size: 35, color: colorScheme.onSurface),
+        Icon(Icons.settings, size: 35, color: colorScheme.onSurface),
       ],
       onTap: (index) {
         Navigator.pushReplacement(
@@ -48,8 +51,9 @@ class CustomNavigationBar extends StatelessWidget {
 
               final fadeAnimation = Tween<double>(
                 begin: 0.0,
-                end: 1.5,
+                end: 1.0,
               ).animate(animation);
+
               return FadeTransition(
                 opacity: fadeAnimation,
                 child: SlideTransition(position: slideAnimation, child: child),

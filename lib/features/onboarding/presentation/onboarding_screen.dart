@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/core/constant/app_color.dart';
 import 'package:masareef/features/home/home_screen.dart';
 import '../models/onboarding_data_model.dart';
 import 'widgets/next_button.dart';
@@ -53,15 +52,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  void _onNext() async {
+  void _onNext() {
     if (_currentPage == _pages.length - 1) {
       if (!context.mounted) return;
-      {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => const HomeScreen()),
-        );
-      }
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const HomeScreen()),
+      );
     } else {
       _pageController.nextPage(
         duration: const Duration(milliseconds: 400),
@@ -72,11 +69,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final screenHeight = MediaQuery.of(context).size.height;
     final isLastPage = _currentPage == _pages.length - 1;
 
     return Scaffold(
-      backgroundColor: AppColor.primaryDark,
+      backgroundColor: colorScheme.surface,
       body: SafeArea(
         child: Column(
           children: [
@@ -92,7 +90,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           child: Text(
                             'Skip',
                             style: TextStyle(
-                              color: Colors.grey,
+                              color: colorScheme.onSurfaceVariant,
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                               height: 0.5.h,

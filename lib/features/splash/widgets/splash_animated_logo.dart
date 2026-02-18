@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/core/constant/app_color.dart';
 import 'package:masareef/core/constant/app_images.dart';
 
 class SplashAnimatedLogo extends StatelessWidget {
@@ -15,6 +14,8 @@ class SplashAnimatedLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return Transform.scale(
       scale: scale.value,
       child: Container(
@@ -22,7 +23,7 @@ class SplashAnimatedLogo extends StatelessWidget {
         height: 200.h,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: AppColor.primaryMedium.withValues(alpha: 0.2),
+          color: colorScheme.secondary.withValues(alpha: 0.2),
         ),
         child: Opacity(
           opacity: opacity.value,
