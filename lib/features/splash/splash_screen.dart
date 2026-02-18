@@ -53,9 +53,8 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-
     return Scaffold(
-      backgroundColor: colorScheme.primary,
+      backgroundColor: colorScheme.surface,
       body: Center(
         child: AnimatedBuilder(
           animation: _controller,
@@ -72,7 +71,6 @@ class _SplashScreenState extends State<SplashScreen>
                   style: TextStyle(
                     fontSize: 24.sp,
                     fontWeight: FontWeight.bold,
-                    color: colorScheme.onPrimary,
                   ),
                 ),
                 verticalSpace(10),
@@ -80,7 +78,6 @@ class _SplashScreenState extends State<SplashScreen>
                   'Your smart money tracking app',
                   style: TextStyle(
                     fontSize: 14.sp,
-                    color: colorScheme.onPrimary.withValues(alpha: 0.75),
                   ),
                 ),
               ],
