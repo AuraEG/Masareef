@@ -2,7 +2,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:masareef/features/adding/add_transaction_screen.dart';
 import 'package:masareef/features/analytics/analytics_screen.dart';
-import 'package:masareef/features/history/expense_history.dart';
+import 'package:masareef/features/expenses/presentation/expense_history_screen.dart';
 import 'package:masareef/features/home/home_screen.dart';
 import 'package:masareef/features/settings/settings_screen.dart';
 
