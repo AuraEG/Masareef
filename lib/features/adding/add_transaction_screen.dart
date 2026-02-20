@@ -3,12 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:masareef/core/utils/spacing.dart';
-import 'package:masareef/core/widgets/custom_app_bar.dart';
-import 'package:masareef/core/widgets/custom_navigation_button.dart';
-import 'package:masareef/features/expenses/domain/expense_category.dart';
-import 'package:masareef/features/expenses/presentation/cubit/expense_cubit.dart';
-import 'package:masareef/features/home/home_screen.dart';
+import '../../core/utils/spacing.dart';
+import '../../core/widgets/custom_app_bar.dart';
+import '../../core/widgets/custom_navigation_button.dart';
+import '../expenses/domain/expense_category.dart';
+import '../expenses/presentation/cubit/expense_cubit.dart';
+import '../home/home_screen.dart';
 
 class AddExpenseScreen extends StatefulWidget {
   const AddExpenseScreen({super.key});

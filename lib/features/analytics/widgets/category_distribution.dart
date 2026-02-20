@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/core/utils/spacing.dart';
-import 'package:masareef/features/expenses/domain/expense_category.dart';
+import '../../../core/utils/spacing.dart';
+import '../../expenses/domain/expense_category.dart';
 
 class CategoryDistribution extends StatelessWidget {
   const CategoryDistribution({super.key, 

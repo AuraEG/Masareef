@@ -1,10 +1,10 @@
 import 'dart:math';
 
 import 'package:bloc/bloc.dart';
-import 'package:masareef/features/expenses/data/expense_repository.dart';
-import 'package:masareef/features/expenses/domain/expense_category.dart';
-import 'package:masareef/features/expenses/domain/expense_model.dart';
-import 'package:masareef/features/expenses/presentation/cubit/expense_state.dart';
+import '../../data/expense_repository.dart';
+import '../../domain/expense_category.dart';
+import '../../domain/expense_model.dart';
+import 'expense_state.dart';
 
 class ExpenseCubit extends Cubit<ExpenseState> {
   ExpenseCubit(this._repository) : super(const ExpenseState());

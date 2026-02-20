@@ -1,4 +1,4 @@
-import 'package:masareef/features/expenses/domain/expense_model.dart';
+import '../domain/expense_model.dart';
 
 abstract class ExpenseRepository {
   Future<List<Expense>> fetchExpenses();

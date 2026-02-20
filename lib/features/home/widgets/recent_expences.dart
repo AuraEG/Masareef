@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:masareef/core/utils/spacing.dart';
-import 'package:masareef/features/expenses/domain/expense_category.dart';
-import 'package:masareef/features/expenses/domain/expense_model.dart';
+import '../../../core/utils/spacing.dart';
+import '../../expenses/domain/expense_category.dart';
+import '../../expenses/domain/expense_model.dart';
 
 class RecentExpenses extends StatelessWidget {
   const RecentExpenses({super.key, required this.expenses});

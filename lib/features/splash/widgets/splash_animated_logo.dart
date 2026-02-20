@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/core/constant/app_images.dart';
+import '../../../core/constant/app_images.dart';
 
 class SplashAnimatedLogo extends StatelessWidget {
   final Animation<double> scale;

@@ -1,5 +1,5 @@
-import 'package:masareef/features/expenses/domain/expense_category.dart';
-import 'package:masareef/features/expenses/domain/expense_model.dart';
+import 'expense_category.dart';
+import 'expense_model.dart';
 
 extension ExpenseListMetrics on Iterable<Expense> {
   double get totalAmount => fold(0, (sum, expense) => sum + expense.amount);

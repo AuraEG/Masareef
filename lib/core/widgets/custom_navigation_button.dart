@@ -1,10 +1,10 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:masareef/features/adding/add_transaction_screen.dart';
-import 'package:masareef/features/analytics/analytics_screen.dart';
-import 'package:masareef/features/expenses/presentation/expense_history_screen.dart';
-import 'package:masareef/features/home/home_screen.dart';
-import 'package:masareef/features/settings/settings_screen.dart';
+import '../../features/adding/add_transaction_screen.dart';
+import '../../features/analytics/analytics_screen.dart';
+import '../../features/expenses/presentation/expense_history_screen.dart';
+import '../../features/home/home_screen.dart';
+import '../../features/settings/settings_screen.dart';
 
 class CustomNavigationBar extends StatelessWidget {
   const CustomNavigationBar({super.key, required this.indx});

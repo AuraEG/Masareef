@@ -1,5 +1,5 @@
-import 'package:masareef/features/expenses/data/expense_repository.dart';
-import 'package:masareef/features/expenses/domain/expense_model.dart';
+import 'expense_repository.dart';
+import '../domain/expense_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesExpenseRepository implements ExpenseRepository {

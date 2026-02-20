@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/features/home/home_screen.dart';
+import '../../home/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../models/onboarding_data_model.dart';
 import 'widgets/next_button.dart';
 import 'widgets/onboarding_content.dart';
@@ -52,9 +53,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  void _onNext() {
+  void _onNext() async {
     if (_currentPage == _pages.length - 1) {
-      if (!context.mounted) return;
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('has_seen_onboarding', true);
+
+      if (!mounted) return;
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const HomeScreen()),

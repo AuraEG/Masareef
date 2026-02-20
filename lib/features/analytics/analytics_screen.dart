@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:masareef/core/utils/spacing.dart';
-import 'package:masareef/core/widgets/custom_app_bar.dart';
-import 'package:masareef/core/widgets/custom_navigation_button.dart';
-import 'package:masareef/features/analytics/widgets/category_distribution.dart';
-import 'package:masareef/features/analytics/widgets/category_ranking.dart';
-import 'package:masareef/features/analytics/widgets/daily_trend_chart.dart';
-import 'package:masareef/features/analytics/widgets/section_card.dart';
-import 'package:masareef/features/expenses/domain/expense_metrics.dart';
-import 'package:masareef/features/expenses/domain/expense_model.dart';
-import 'package:masareef/features/expenses/presentation/cubit/expense_cubit.dart';
-import 'package:masareef/features/expenses/presentation/cubit/expense_state.dart';
+import '../../core/utils/spacing.dart';
+import '../../core/widgets/custom_app_bar.dart';
+import '../../core/widgets/custom_navigation_button.dart';
+import 'widgets/category_distribution.dart';
+import 'widgets/category_ranking.dart';
+import 'widgets/daily_trend_chart.dart';
+import 'widgets/section_card.dart';
+import '../expenses/domain/expense_metrics.dart';
+import '../expenses/domain/expense_model.dart';
+import '../expenses/presentation/cubit/expense_cubit.dart';
+import '../expenses/presentation/cubit/expense_state.dart';
 
 class AnalyticsScreen extends StatelessWidget {
   const AnalyticsScreen({super.key});

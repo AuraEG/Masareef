@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:masareef/core/utils/spacing.dart';
+
+import '../../../core/utils/spacing.dart';
 
 class SettingsLanguageItem extends StatelessWidget {
   final String selectedLanguage;

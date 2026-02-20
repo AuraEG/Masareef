@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:masareef/core/utils/spacing.dart';
-import 'package:masareef/features/expenses/domain/expense_category.dart';
+import '../../../core/utils/spacing.dart';
+import '../../expenses/domain/expense_category.dart';
 
 class CategoryRanking extends StatelessWidget {
   const CategoryRanking({super.key, required this.entries});

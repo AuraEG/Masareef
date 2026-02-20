@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:masareef/features/expenses/domain/expense_category.dart';
+import 'expense_category.dart';
 
 class Expense {
   const Expense({

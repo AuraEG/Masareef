@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
-import 'package:masareef/core/utils/spacing.dart';
-import 'package:masareef/features/expenses/domain/expense_category.dart';
-import 'package:masareef/features/expenses/domain/expense_model.dart';
-import 'package:masareef/features/expenses/presentation/cubit/expense_cubit.dart';
+
+import '../../../../core/utils/spacing.dart';
+import '../../domain/expense_category.dart';
+import '../../domain/expense_model.dart';
+import '../cubit/expense_cubit.dart';
 
 class ExpenseTile extends StatelessWidget {
   const ExpenseTile({super.key, required this.expense});

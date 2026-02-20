@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/features/expenses/domain/expense_category.dart';
-import 'package:masareef/features/expenses/presentation/expense_history_screen.dart';
+import '../../domain/expense_category.dart';
+import '../expense_history_screen.dart';
 
 class FilterBar extends StatelessWidget {
   const FilterBar({super.key, 

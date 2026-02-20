@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/core/utils/spacing.dart';
+import '../../../core/utils/spacing.dart';
 
 class ClearDataDialog extends StatelessWidget {
   final Future<void> Function() onConfirm;
