@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:masareef/core/constant/app_color.dart';
-import 'package:masareef/core/constant/app_images.dart';
+import '../../../core/constant/app_images.dart';
 
 class SplashAnimatedLogo extends StatelessWidget {
   final Animation<double> scale;
@@ -22,7 +21,6 @@ class SplashAnimatedLogo extends StatelessWidget {
         height: 200.h,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: AppColor.primaryGreen.withValues(alpha: 0.2),
         ),
         child: Opacity(
           opacity: opacity.value,
