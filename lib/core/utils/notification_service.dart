@@ -14,10 +14,7 @@ class NotificationService {
       FlutterLocalNotificationsPlugin();
 
   Future<void> init() async {
-    const androidSettings = AndroidInitializationSettings(
-      '@mipmap/ic_launcher',
-    );
-
+    const androidSettings = AndroidInitializationSettings('@mipmap/ic_launcher');
     const settings = InitializationSettings(android: androidSettings);
 
     await _notifications.initialize(settings: settings);
@@ -29,6 +26,25 @@ class NotificationService {
           AndroidFlutterLocalNotificationsPlugin
         >()
         ?.requestNotificationsPermission();
+
+    await requestExactAlarmPermission();
+  }
+
+  Future<void> requestExactAlarmPermission() async {
+    final android = _notifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >();
+    await android?.requestExactAlarmsPermission();
+  }
+
+  Future<bool> _canScheduleExactAlarms() async {
+    final android = _notifications
+        .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin
+        >();
+    final canSchedule = await android?.canScheduleExactNotifications();
+    return canSchedule ?? true;
   }
 
   Future<bool> isDailyReminderEnabled() async {
@@ -60,7 +76,7 @@ class NotificationService {
     await _notifications.cancel(id: _dailyReminderId);
   }
 
-  Future<void> scheduleDailyReminder({int hour = 22, int minute = 0}) async {
+  Future<void> scheduleDailyReminder({int hour = 0, int minute = 46}) async {
     const androidDetails = AndroidNotificationDetails(
       'daily_channel',
       'Daily Reminder',
@@ -69,12 +85,17 @@ class NotificationService {
       priority: Priority.high,
     );
     const iosDetails = DarwinNotificationDetails();
-
     const details = NotificationDetails(
       android: androidDetails,
       iOS: iosDetails,
       macOS: iosDetails,
     );
+
+    final canExact = await _canScheduleExactAlarms();
+    final scheduleMode = canExact
+        ? AndroidScheduleMode.exactAllowWhileIdle
+        : AndroidScheduleMode.inexactAllowWhileIdle;
+
     final scheduledDate = _nextInstanceOfTime(hour: hour, minute: minute);
 
     await _notifications.zonedSchedule(
@@ -83,17 +104,24 @@ class NotificationService {
       body: 'الساعة 10:00 مساءً.. افتح التطبيق وسجّل مصاريفك اليوم.',
       scheduledDate: scheduledDate,
       notificationDetails: details,
-      androidScheduleMode: AndroidScheduleMode.inexactAllowWhileIdle,
+      androidScheduleMode: scheduleMode,
       matchDateTimeComponents: DateTimeComponents.time,
     );
   }
 
   tz.TZDateTime _nextInstanceOfTime({required int hour, required int minute}) {
-    final now = DateTime.now();
-    var target = DateTime(now.year, now.month, now.day, now.hour, now.minute);
+    final now = tz.TZDateTime.now(tz.local);
+    var target = tz.TZDateTime(
+      tz.local,
+      now.year,
+      now.month,
+      now.day,
+      hour,
+      minute,
+    );
     if (!target.isAfter(now)) {
       target = target.add(const Duration(days: 1));
     }
-    return tz.TZDateTime.from(target, tz.local);
+    return target;
   }
 }

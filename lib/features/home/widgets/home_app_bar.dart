@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:masareef/core/utils/noti_serv.dart';
 import '../../../core/utils/spacing.dart';
 
 class HomeAppBar extends StatelessWidget {
@@ -37,7 +38,10 @@ class HomeAppBar extends StatelessWidget {
         IconButton.outlined(
           color: colorScheme.secondary,
           onPressed: () {
-            // TODO: navigate to notification screen after implementing it.
+            NotiServ().showNotification(
+              title: "TEST ...",
+              body: "صلي على النبي",
+            );
           },
           icon: const Icon(Icons.notifications_active_outlined),
         ),

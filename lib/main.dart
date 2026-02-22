@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:masareef/core/utils/noti_serv.dart';
 import 'core/utils/notification_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +14,11 @@ Future<void> main() async {
 
   final themeController = ThemeController();
   await themeController.loadThemeMode();
+  final noti = NotiServ();
 
+  await noti.initNotification();
+
+  // await noti.showNotification(title: "Test", body: "Hello");
   await NotificationService.instance.init();
   await NotificationService.instance.syncDailyReminderWithPreference();
 
