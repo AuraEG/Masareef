@@ -76,7 +76,7 @@ class NotificationService {
     await _notifications.cancel(id: _dailyReminderId);
   }
 
-  Future<void> scheduleDailyReminder({int hour = 0, int minute = 46}) async {
+  Future<void> scheduleDailyReminder({int hour = 10, int minute = 0}) async {
     const androidDetails = AndroidNotificationDetails(
       'daily_channel',
       'Daily Reminder',
