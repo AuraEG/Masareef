@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'core/utils/notification_service.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/theme/app_theme.dart';
@@ -12,6 +13,9 @@ Future<void> main() async {
 
   final themeController = ThemeController();
   await themeController.loadThemeMode();
+
+  await NotificationService.instance.init();
+  await NotificationService.instance.syncDailyReminderWithPreference();
 
   runApp(MyApp(themeController: themeController));
 }

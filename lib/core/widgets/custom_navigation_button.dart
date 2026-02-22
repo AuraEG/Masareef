@@ -45,7 +45,7 @@ class CustomNavigationBar extends StatelessWidget {
         Navigator.pushReplacement(
           context,
           PageRouteBuilder(
-            transitionDuration: const Duration(milliseconds: 600),
+            // transitionDuration: const Duration(milliseconds: 200),
             pageBuilder: (_, animation, secondaryAnimation) => screens[index],
             transitionsBuilder: (_, animation, secondaryAnimation, child) {
               final slideAnimation =

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../core/theme/theme_controller.dart';
+import '../../core/utils/notification_service.dart';
 import '../../core/utils/spacing.dart';
 import '../../core/widgets/custom_app_bar.dart';
 import '../../core/widgets/custom_navigation_button.dart';
@@ -29,6 +30,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   bool _notificationsEnabled = true;
   String _selectedLanguage = 'English';
   String _alternateLanguage = 'العربية';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadNotificationPreference();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -144,8 +151,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void _handleNotificationsToggle(bool value) {
+  Future<void> _loadNotificationPreference() async {
+    final isEnabled = await NotificationService.instance
+        .isDailyReminderEnabled();
+    if (!mounted) return;
+    setState(() => _notificationsEnabled = isEnabled);
+  }
+
+  void _handleNotificationsToggle(bool value) async {
+    final previousValue = _notificationsEnabled;
     setState(() => _notificationsEnabled = value);
+
+    try {
+      await NotificationService.instance.setDailyReminderEnabled(value);
+      if (!mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            value
+                ? 'Daily reminder enabled for 10:00 PM'
+                : 'Daily reminder disabled',
+          ),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    } catch (_) {
+      if (!mounted) return;
+      setState(() => _notificationsEnabled = previousValue);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to update notification settings'),
+          behavior: SnackBarBehavior.floating,
+        ),
+      );
+    }
   }
 
   void _showLanguageChangeDialog() {
